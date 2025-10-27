@@ -76,6 +76,10 @@ public abstract class BasePage {
     public boolean isLeftNavComponentDisplayed() {
         return leftNav.isDisplayed();
     }
+
+    public LeftNavComponent getLeftNav(){
+        return this.leftNav;
+    }
     public boolean isOnPage(WebElement... elements) {
         return this.isOnPage(this.timeOutSeconds, elements);
     }

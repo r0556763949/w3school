@@ -66,4 +66,21 @@ public class LeftNavComponent {
         WebElement link = container.findElement(By.xpath(".//a[normalize-space(text())='" + subItemText + "']"));
         link.click();
     }
+    public int getSubItemIndexByName(String subItemText) {
+        // מעבר על כל הכותרות והחיפוש אחר תתי הנושאים
+        List<String> allHeadings = getHeadings();  // קבל את כל הכותרות
+
+        for (int headingIndex = 0; headingIndex < allHeadings.size(); headingIndex++) {
+            List<String> subItems = getSubItemsByHeadingIndex(headingIndex);  // קבל את תתי הנושאים לפי הכותרת
+            for (int i = 0; i < subItems.size(); i++) {
+                // אם תת-הנושא נמצא
+                if (subItems.get(i).equalsIgnoreCase(subItemText.trim())) {
+                    return i;  // מחזיר את האינדקס אם נמצא
+                }
+            }
+        }
+
+        // אם לא נמצא, מחזיר -1
+        return -1;
+    }
 }
