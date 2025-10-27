@@ -1,0 +1,97 @@
+{
+  "objectsRepository": [
+    {
+      "objectId": "title",
+      "pageName": "W3SchoolsHomePage",
+      "locators": [
+        {
+          "type": "css",
+          "value": "h1.learntocodeh1",
+          "grade": 100
+        },
+        {
+          "type": "xpath",
+          "value": "//h1[contains(text(), 'Learn to Code')]",
+          "grade": 90
+        }
+      ]
+    },
+    {
+      "objectId": "HOME-SEARCH-FIELD",
+      "pageName": "W3SchoolsHomePage",
+      "locators": [
+        {
+          "type": "id",
+          "value": "search2",
+          "grade": 100
+        }
+      ]
+    },
+    {
+      "objectId": "HOME-SEARCH-BUTTON",
+      "pageName": "W3SchoolsHomePage",
+      "locators": [
+        {
+          "type": "id",
+          "value": "learntocode_searchbtn",
+          "grade": 100
+        }
+      ]
+    },
+    {
+      "objectId": "SEARCH-RESULTS-CONTAINER",
+      "pageName": "W3SchoolsHomePage",
+      "locators": [
+        {
+          "type": "id",
+          "value": "listofsearchresults",
+          "grade": 100
+        }
+
+      ]
+    },
+    {
+      "objectId": "LEFT-MENU",
+      "pageName": "W3SchoolsJavaTutorialPage",
+      "locators": [
+        { "type": "id", "value": "leftmenuinnerinner", "grade": 100 }
+      ]
+    },
+    {
+      "objectId": "LEFT-MENU-HEADERS",
+      "pageName": "W3SchoolsJavaTutorialPage",
+      "locators": [
+        {
+          "type": "css",
+          "value": "#leftmenuinnerinner h2",
+          "grade": 100
+        }
+      ]
+    },
+    {
+      "objectId": "LEFT-MENU-LINKS",
+      "pageName": "W3SchoolsJavaTutorialPage",
+      "locators": [
+        {
+          "type": "css",
+          "value": "#leftmenuinnerinner a",
+          "grade": 100
+        }
+      ]
+    },
+    {
+      "objectId": "NEXT-BUTTON",
+      "pageName": "W3SchoolsJavaTutorialPage",
+      "locators": [
+        { "type": "css", "value": "a.w3-right.w3-btn[href*='java_']", "grade": 100 }
+      ]
+    },
+    {
+      "objectId": "PREV-BUTTON",
+      "pageName": "W3SchoolsJavaTutorialPage",
+      "locators": [
+        { "type": "css", "value": "a.w3-left.w3-btn[href*='java_']", "grade": 100 }
+      ]
+    }
+  ]
+}
