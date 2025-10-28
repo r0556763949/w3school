@@ -5,6 +5,8 @@ import co.verisoft.fw.utils.Waits;
 import jdk.jfr.Description;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeOptions;
 import pages.W3SchoolsJavaTutorialPage;
@@ -12,7 +14,7 @@ import pages.components.LeftNavComponent;
 
 import java.util.Arrays;
 import java.util.List;
-
+@Execution(ExecutionMode.CONCURRENT)
 public class JavaTutorialTest extends BaseTest {
     @DriverCapabilities
     private final ChromeOptions capabilities = new ChromeOptions();

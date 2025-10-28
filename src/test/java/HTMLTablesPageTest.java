@@ -2,11 +2,13 @@ import co.verisoft.fw.asserts.SoftAssertsScreenShot;
 import co.verisoft.fw.selenium.drivers.VerisoftDriver;
 import co.verisoft.fw.selenium.drivers.factory.DriverCapabilities;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.openqa.selenium.chrome.ChromeOptions;
 import pages.HTMLTablesPage;
 
 import java.util.List;
-
+@Execution(ExecutionMode.CONCURRENT)
 public class HTMLTablesPageTest extends BaseTest{
 
     @DriverCapabilities

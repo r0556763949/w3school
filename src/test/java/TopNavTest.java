@@ -1,6 +1,7 @@
 import co.verisoft.fw.asserts.SoftAssertsScreenShot;
 import co.verisoft.fw.selenium.drivers.VerisoftDriver;
 import co.verisoft.fw.selenium.drivers.factory.DriverCapabilities;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.chrome.ChromeOptions;
 import pages.components.TopNavComponent;
@@ -10,6 +11,7 @@ public class TopNavTest extends BaseTest{
     private final ChromeOptions capabilities = new ChromeOptions();
 
     @Test
+    @Disabled("This test is disabled, it's only for me")
     void verifyTopNavAndHtmlNavigation(VerisoftDriver driver) {
         SoftAssertsScreenShot softAssert = new SoftAssertsScreenShot(driver);
 
