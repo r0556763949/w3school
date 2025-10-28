@@ -22,7 +22,6 @@ public class HTMLTablesPage extends BasePage{
 
     public HTMLTablesPage(WebDriver driver) {
         super(driver);
-          PageFactory.initElements(driver, this);
     }
 
     @Override
@@ -31,6 +30,7 @@ public class HTMLTablesPage extends BasePage{
             WebElement visibleTable = Waits.visibilityOf(driver, timeOutSeconds, table);
             return visibleTable.isDisplayed();
         } catch (Exception e) {
+            log.error("Error while checking if the table is on the page: ", e);
             return false;
         }
     }

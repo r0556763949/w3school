@@ -18,6 +18,8 @@ public class HTMLTablesPageTest extends BaseTest{
         driver.get("https://www.w3schools.com/html/html_tables.asp");
         HTMLTablesPage htmlTablesPage = new HTMLTablesPage(driver);
 
+        softAssert.assertTrue(htmlTablesPage.isLeftNavComponentDisplayed(),"Left Nav Component is not displayed");
+        softAssert.assertTrue(htmlTablesPage.isTopNavComponentDisplayed(),"Top Nav Component is not displayed");
         softAssert.assertTrue(htmlTablesPage.isOnPage(), "HTML Tables page should be displayed");
 
         List<String> expectedHeaders = List.of("Company", "Contact", "Country");

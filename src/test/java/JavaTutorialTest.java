@@ -100,7 +100,12 @@ public class JavaTutorialTest extends BaseTest {
                 expectedSubTopics2,
                 "Subtopics for second main topic should match expected"
         );
-      //  javaPage.verifyNextTopicNavigation();
+        javaPage.verifyNextTopicNavigation();
+        javaPage.getTopNav().clickLinkByText("html");
+        softAssert.assertTrue(
+                driver.getCurrentUrl().contains("html") ,
+                "Did not navigate to html tutorial page"
+        );
         softAssert.assertAll();
     }
 }

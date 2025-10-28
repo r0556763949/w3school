@@ -3,19 +3,25 @@ package pages;
 import co.verisoft.fw.objectrepository.ObjectReporsitoryFactory;
 import co.verisoft.fw.utils.Property;
 import co.verisoft.fw.utils.Waits;
+import lombok.Generated;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import org.openqa.selenium.support.PageFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pages.components.LeftNavComponent;
 import pages.components.TopNavComponent;
 
+import java.util.Arrays;
+
 
 public abstract class BasePage {
-    // private static final Logger log = LoggerFactory.getLogger(BasePage.class);
+    @Generated
+    protected static final Logger log = LoggerFactory.getLogger(co.verisoft.fw.pages.BasePage.class);
 
-    protected  WebDriver driver;
+    protected WebDriver driver;
     protected final int timeOutSeconds;
     protected final int pollingMillis;
     protected final String objectRepositoryPath;
@@ -36,18 +42,10 @@ public abstract class BasePage {
         String repo = p.getProperty("object.repository.path");
         if (objectRepositoryFilePath != null && !objectRepositoryFilePath.isEmpty()) {
             this.objectRepositoryPath = objectRepositoryFilePath;
-            System.out.println("Object repository path in use: " + this.objectRepositoryPath);
         } else if (repo != null && !repo.isEmpty()) {
-            System.out.println("repo!!!!!!!!! "+ repo);
             this.objectRepositoryPath = repo;
-        } else {
-             Property defaults = new Property("default.config.properties");
-            String def = defaults.getProperty("object.repository.path");
-            if (def == null) {
-                throw new RuntimeException("object.repository.path not configured in root or default config");
-            }
-            this.objectRepositoryPath = def;
         }
+        else {this.objectRepositoryPath = " ";};// כדאי להוסיף פה אפשרות של קובץ default אני אוסיף בהמשך
         initElementsPageFactory(driver);
         ObjectReporsitoryFactory.initObjects(driver, this, this.objectRepositoryPath);
         try {
@@ -77,9 +75,14 @@ public abstract class BasePage {
         return leftNav.isDisplayed();
     }
 
-    public LeftNavComponent getLeftNav(){
+    public LeftNavComponent getLeftNav() {
         return this.leftNav;
     }
+
+    public TopNavComponent getTopNav() {
+        return this.topNav;
+    }
+
     public boolean isOnPage(WebElement... elements) {
         return this.isOnPage(this.timeOutSeconds, elements);
     }
@@ -87,17 +90,20 @@ public abstract class BasePage {
     public boolean isOnPage(By locator) {
         try {
             Waits.visibilityOfAllElementsLocatedBy(this.driver, this.timeOutSeconds, locator);
+            log.info("elements " + String.valueOf(locator) + " was present on page");
             return true;
         } catch (Exception var3) {
+            log.info("elements " + String.valueOf(locator) + " wasn't present on page");
             return false;
         }
     }
-
     public boolean isOnPage(int timeout, WebElement... elements) {
         try {
             Waits.visibilityOfAllElements(this.driver, timeout, elements);
+            log.info("elements " + Arrays.toString(elements) + "was present on page");
             return true;
         } catch (Exception var4) {
+            log.info("elements " + Arrays.toString(elements) + "wasn't present on page");
             return false;
         }
     }
@@ -107,6 +113,7 @@ public abstract class BasePage {
             Waits.urlContains(driver, Math.max(1, timeOutSeconds / 10), fraction);
             return true;
         } catch (Exception e) {
+            log.info("url isn't correct");
             return false;
         }
     }

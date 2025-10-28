@@ -21,25 +21,25 @@ public class HomePageTest extends BaseTest {
     @Description("open home, topnav , search java , choose java-tutoril")
     public void HomeTest(VerisoftDriver driver) {
 
-        SoftAssertsScreenShot soft = new SoftAssertsScreenShot(driver);
+        SoftAssertsScreenShot softAssert = new SoftAssertsScreenShot(driver);
         driver.get("https://www.w3schools.com/");
         W3SchoolsHomePage home = new W3SchoolsHomePage(driver);
-        soft.assertTrue(home.isOnPage(), "Home page not loaded - 'Learn to Code' missing");
+        softAssert.assertTrue(home.isOnPage(), "Home page not loaded - 'Learn to Code' missing");
 
         home.search("java");
-        soft.assertTrue(home.waitForResultsToAppear(), "Search results did not appear");
+        softAssert.assertTrue(home.waitForResultsToAppear(), "Search results did not appear");
 
         List<String> results = home.getResultTexts();
-        soft.assertFalse(results.isEmpty(), "No results found");
-        soft.assertTrue(home.allResultsContain("java"), "Some results do not contain 'java'");
+        softAssert.assertFalse(results.isEmpty(), "No results found");
+        softAssert.assertTrue(home.allResultsContain("java"), "Some results do not contain 'java'");
 
         home.selectSuggestion("Java Tutorial");
-        soft.assertTrue(
+        softAssert.assertTrue(
                 driver.getCurrentUrl().contains("java") || driver.getCurrentUrl().contains("tutorial"),
                 "Did not navigate to Java tutorial page"
         );
 
-        soft.assertAll();
+        softAssert.assertAll();
     }
 
 }
