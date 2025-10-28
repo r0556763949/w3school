@@ -25,6 +25,7 @@ public class HomePageTest extends BaseTest {
         driver.get("https://www.w3schools.com/");
         W3SchoolsHomePage home = new W3SchoolsHomePage(driver);
         softAssert.assertTrue(home.isOnPage(), "Home page not loaded - 'Learn to Code' missing");
+        softAssert.assertTrue(home.isTopNavComponentDisplayed(), "Top nav not loaded");
 
         home.search("java");
         softAssert.assertTrue(home.waitForResultsToAppear(), "Search results did not appear");

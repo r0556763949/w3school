@@ -53,7 +53,7 @@ public class W3SchoolsHomePage extends BasePage{
             Waits.visibilityOf(driver, timeOutSeconds, resultContainer);
             return isElementDisplayed(resultContainer);
         } catch (Exception e) {
-            System.out.println("Search results container not found: " + e.getMessage());
+            log.info("no reasult appeared");
             return false;
         }
     }
@@ -67,7 +67,7 @@ public class W3SchoolsHomePage extends BasePage{
                     .filter(text -> !text.trim().isEmpty())
                     .collect(Collectors.toList());
         } catch (Exception e) {
-            System.out.println("Failed to retrieve result items: " + e.getMessage());
+            log.info("Failed to retrieve result items: " + e.getMessage());
             return List.of();
         }
     }
@@ -76,7 +76,7 @@ public class W3SchoolsHomePage extends BasePage{
     public boolean allResultsContain(String keyword) {
         List<String> results = getResultTexts();
         if (results.isEmpty()) {
-            System.out.println("No search results found.");
+            log.info("No search results found.");
             return false;
         }
 
@@ -84,7 +84,7 @@ public class W3SchoolsHomePage extends BasePage{
                 .allMatch(text -> text.toLowerCase().contains(keyword.toLowerCase()));
 
         if (!allMatch) {
-            System.out.println("Some results do not contain the keyword '" + keyword + "'");
+            log.info("Some results do not contain the keyword '" + keyword + "'");
             results.forEach(System.out::println);
         }
 
@@ -94,20 +94,19 @@ public class W3SchoolsHomePage extends BasePage{
     public void selectSuggestion(String text) {
         try {
             Waits.visibilityOf(driver, timeOutSeconds, resultContainer);
-
             List<WebElement> items = resultContainer.findElements(By.cssSelector("a.search_item"));
             for (WebElement item : items) {
                 if (item.getText().toLowerCase().contains(text.toLowerCase())) {
-                    System.out.println("Clicking on result: " + item.getText());
+                   log.info("Clicking on result: " + item.getText());
                     item.click();
                     return;
                 }
             }
 
-            System.out.println("No result found containing: " + text);
+            log.info("No result found containing: " + text);
 
         } catch (Exception e) {
-            System.out.println("Failed to select suggestion: " + e.getMessage());
+           log.info("Failed to select suggestion: " + e.getMessage());
         }
     }
 

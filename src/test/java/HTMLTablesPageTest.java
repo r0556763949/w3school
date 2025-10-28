@@ -1,6 +1,8 @@
 import co.verisoft.fw.asserts.SoftAssertsScreenShot;
 import co.verisoft.fw.selenium.drivers.VerisoftDriver;
 import co.verisoft.fw.selenium.drivers.factory.DriverCapabilities;
+import jdk.jfr.Description;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
@@ -15,14 +17,16 @@ public class HTMLTablesPageTest extends BaseTest{
     private final ChromeOptions capabilities = new ChromeOptions();
 
     @Test
+    @DisplayName("open HTMLTables")
+    @Description("in html page, leftnav, topnav, table... ")
     public void verifyHtmlTableContent(VerisoftDriver driver) {
         SoftAssertsScreenShot softAssert = new SoftAssertsScreenShot(driver);
         driver.get("https://www.w3schools.com/html/html_tables.asp");
         HTMLTablesPage htmlTablesPage = new HTMLTablesPage(driver);
 
+        softAssert.assertTrue(htmlTablesPage.isOnPage(), "HTML Tables page should be displayed");
         softAssert.assertTrue(htmlTablesPage.isLeftNavComponentDisplayed(),"Left Nav Component is not displayed");
         softAssert.assertTrue(htmlTablesPage.isTopNavComponentDisplayed(),"Top Nav Component is not displayed");
-        softAssert.assertTrue(htmlTablesPage.isOnPage(), "HTML Tables page should be displayed");
 
         List<String> expectedHeaders = List.of("Company", "Contact", "Country");
         softAssert.assertEquals(
