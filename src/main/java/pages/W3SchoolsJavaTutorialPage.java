@@ -50,6 +50,17 @@ public class W3SchoolsJavaTutorialPage extends BasePage{
         int nextIndex = leftNav.getSubItemIndexByName(getPageTitleText());
         return nextIndex == currentIndex + 1;
     }
+    public boolean clickPreviousAndVerify() {
+        int currentIndex = leftNav.getSubItemIndexByName(getPageTitleText());
+        if (currentIndex == 0) {
+            log.info("Can't go back. This is the first sub-topic.");
+            return false;
+        }
+        clickPrevious();
+        Waits.pageToFullyLoad(driver, timeOutSeconds);
+        int previousIndex = leftNav.getSubItemIndexByName(getPageTitleText());
+        return previousIndex == currentIndex - 1;
+    }
 
     public String getPageTitleText() {
         WebElement headingElement = driver.findElement(By.tagName("h1"));

@@ -101,6 +101,7 @@ public class JavaTutorialTest extends BaseTest {
                 "Subtopics for second main topic should match expected"
         );
         javaPage.verifyNextTopicNavigation();
+        javaPage.clickPreviousAndVerify();
         javaPage.getTopNav().clickLinkByText("html");
         softAssert.assertTrue(
                 driver.getCurrentUrl().contains("html") ,
