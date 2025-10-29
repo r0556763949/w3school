@@ -47,27 +47,12 @@ public class W3SchoolsJavaTutorialPage extends BasePage{
         clickNext();
         Waits.pageToFullyLoad(driver, timeOutSeconds);
         return driver.getCurrentUrl().contains(nextHref);
-//        int currentIndex = leftNav.getSubItemIndexByName(getPageTitleText());
-//        clickNext();
-//        Waits.pageToFullyLoad(driver, timeOutSeconds);
-//        leftNav.isDisplayed();
-//        int nextIndex = leftNav.getSubItemIndexByName(getPageTitleText());
-//        return nextIndex == currentIndex + 1;
     }
     public boolean clickPreviousAndVerify() {
         String prevHref = prevButton.getAttribute("href");
         clickPrevious();
         Waits.pageToFullyLoad(driver, timeOutSeconds);
         return driver.getCurrentUrl().contains(prevHref);
-//        int currentIndex = leftNav.getSubItemIndexByName(getPageTitleText());
-//        if (currentIndex == 0) {
-//            log.info("Can't go back. This is the first sub-topic.");
-//            return false;
-//        }
-//        clickPrevious();
-//        Waits.pageToFullyLoad(driver, timeOutSeconds);
-//        int previousIndex = leftNav.getSubItemIndexByName(getPageTitleText());
-//        return previousIndex == currentIndex - 1;
     }
 
     public String getPageTitleText() {
