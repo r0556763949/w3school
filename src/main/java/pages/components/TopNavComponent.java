@@ -1,5 +1,6 @@
 package pages.components;
 
+import co.verisoft.fw.utils.Waits;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,6 +30,7 @@ public class TopNavComponent {
         PageFactory.initElements(driver, this);
     }
     public boolean isDisplayed() {
+        Waits.visibilityOfAllElements(this.driver, 10, topNavBar);
         return topNavBar.isDisplayed();
     }
 

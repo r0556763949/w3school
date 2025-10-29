@@ -5,6 +5,7 @@ import co.verisoft.fw.utils.Waits;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,19 +13,20 @@ import java.util.stream.Collectors;
 
 public class W3SchoolsHomePage extends BasePage{
 
-    @ObjectRepositoryItem(id = "title")
+    @FindBy(css = "h1.learntocodeh1")
     private WebElement title;
 
-    @ObjectRepositoryItem(id = "HOME-SEARCH-FIELD")
+    @FindBy(id = "search2")
     private WebElement searchField;
 
-    @ObjectRepositoryItem(id = "HOME-SEARCH-BUTTON")
+    @FindBy(id = "learntocode_searchbtn")
     private WebElement searchButton;
 
-    @ObjectRepositoryItem(id = "SEARCH-RESULTS-CONTAINER")
+    @FindBy(id = "listofsearchresults")
     private WebElement resultContainer;
-    @ObjectRepositoryItem(id = "SEARCH-RESULTS-ITEMS")
-    private WebElement resultItems;
+
+    @FindBy(css = "a.search_item")
+    private List<WebElement> resultItems;
 
 
     public W3SchoolsHomePage(WebDriver driver) {

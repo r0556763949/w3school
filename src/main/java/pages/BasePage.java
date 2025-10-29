@@ -19,35 +19,24 @@ import java.util.Arrays;
 
 public abstract class BasePage {
     @Generated
-    protected static final Logger log = LoggerFactory.getLogger(co.verisoft.fw.pages.BasePage.class);
+    protected static final Logger log = LoggerFactory.getLogger(BasePage.class);
 
     protected WebDriver driver;
     protected final int timeOutSeconds;
     protected final int pollingMillis;
-    protected final String objectRepositoryPath;
+
     protected TopNavComponent topNav;
     protected LeftNavComponent leftNav;
 
-    public BasePage(WebDriver driver) {
-        this(driver, null);
-        this.topNav = new TopNavComponent(driver);
-        this.leftNav = new LeftNavComponent(driver);
-    }
 
-    public BasePage(WebDriver driver, String objectRepositoryFilePath) {
+    public BasePage(WebDriver driver) {
         this.driver = driver;
         Property p = new Property();
         this.timeOutSeconds = p.getIntProperty("selenium.wait.timeout");
         this.pollingMillis = p.getIntProperty("polling.interval");
-        String repo = p.getProperty("object.repository.path");
-        if (objectRepositoryFilePath != null && !objectRepositoryFilePath.isEmpty()) {
-            this.objectRepositoryPath = objectRepositoryFilePath;
-        } else if (repo != null && !repo.isEmpty()) {
-            this.objectRepositoryPath = repo;
-        }
-        else {this.objectRepositoryPath = " ";};// כדאי להוסיף פה אפשרות של קובץ default אני אוסיף בהמשך
+        this.topNav = new TopNavComponent(driver);
+        this.leftNav = new LeftNavComponent(driver);
         initElementsPageFactory(driver);
-        ObjectReporsitoryFactory.initObjects(driver, this, this.objectRepositoryPath);
         try {
             Waits.pageToFullyLoad(driver, timeOutSeconds);
         } catch (Exception e) {

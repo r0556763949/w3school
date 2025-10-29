@@ -1,5 +1,6 @@
 package pages.components;
 
+import co.verisoft.fw.utils.Waits;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,6 +21,7 @@ public class LeftNavComponent {
     }
 
     public boolean isDisplayed() {
+        Waits.visibilityOfAllElements(this.driver, 10, container);
         return container.isDisplayed();
     }
 
@@ -67,20 +69,17 @@ public class LeftNavComponent {
         link.click();
     }
     public int getSubItemIndexByName(String subItemText) {
-        // מעבר על כל הכותרות והחיפוש אחר תתי הנושאים
-        List<String> allHeadings = getHeadings();  // קבל את כל הכותרות
+        List<String> allHeadings = getHeadings();
 
         for (int headingIndex = 0; headingIndex < allHeadings.size(); headingIndex++) {
-            List<String> subItems = getSubItemsByHeadingIndex(headingIndex);  // קבל את תתי הנושאים לפי הכותרת
+            List<String> subItems = getSubItemsByHeadingIndex(headingIndex);
             for (int i = 0; i < subItems.size(); i++) {
-                // אם תת-הנושא נמצא
                 if (subItems.get(i).equalsIgnoreCase(subItemText.trim())) {
-                    return i;  // מחזיר את האינדקס אם נמצא
+                    return i;
                 }
             }
         }
 
-        // אם לא נמצא, מחזיר -1
         return -1;
     }
 }

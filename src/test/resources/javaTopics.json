@@ -1,0 +1,23 @@
+{
+  "Java Tutorial": [
+    "Java HOME", "Java Intro", "Java Get Started", "Java Syntax", "Java Output",
+    "Java Comments", "Java Variables", "Java Data Types", "Java Type Casting",
+    "Java Operators", "Java Strings", "Java Math", "Java Booleans",
+    "Java If...Else", "Java Switch", "Java While Loop", "Java For Loop",
+    "Java Break/Continue", "Java Arrays"
+  ],
+  "Java Methods": [
+    "Java Methods", "Java Method Parameters", "Java Method Overloading",
+    "Java Scope", "Java Recursion"
+  ],
+  "Java Classes": [],
+  "Java Errors": [],
+  "Java File Handling": [],
+  "Java I/O Streams": [],
+  "Java Data Structures": [],
+  "Java Advanced": [],
+  "Java Projects": [],
+  "Java How To's": [],
+  "Java Reference": [],
+  "Java Examples": []
+}
