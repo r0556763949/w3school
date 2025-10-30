@@ -43,12 +43,12 @@ public class HTMLTablesPage extends BasePage{
 
     public List<String> getContactAndCountryByRowIndex(int rowIndex) {
         if (rowIndex < 0 || rowIndex >= rows.size()) {
-            throw new IllegalArgumentException("Invalid row index: " + rowIndex);
+            log.error("Invalid row index: " + rowIndex);
         }
 
         List<WebElement> cells = rows.get(rowIndex).findElements(By.tagName("td"));
         if (cells.size() < 3) {
-            throw new IllegalStateException("Row doesn't contain enough cells");
+            log.error("Row doesn't contain enough cells");
         }
 
         String contact = cells.get(1).getText().trim();

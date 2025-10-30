@@ -30,7 +30,7 @@ public class TopNavComponent {
         PageFactory.initElements(driver, this);
     }
     public boolean isDisplayed() {
-        Waits.visibilityOfAllElements(this.driver, 10, topNavBar);
+        Waits.visibilityOf(this.driver, 10, topNavBar);
         return topNavBar.isDisplayed();
     }
 

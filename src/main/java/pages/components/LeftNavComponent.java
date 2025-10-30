@@ -15,27 +15,27 @@ public class LeftNavComponent {
     @FindBy(id = "leftmenuinnerinner")
     private WebElement container;
 
+    @FindBy(css = "#leftmenuinnerinner h2, #leftmenuinnerinner .left")
+    private List<WebElement> headings;
+
+    @FindBy(css = "#leftmenuinnerinner a")
+    private List<WebElement> subLinks;
+
     public LeftNavComponent(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
     public boolean isDisplayed() {
-        Waits.visibilityOfAllElements(this.driver, 10, container);
+        Waits.visibilityOf(this.driver, 10, container);
         return container.isDisplayed();
     }
 
     public List<String> getHeadings() {
-        List<String> headings = new ArrayList<>();
-        List<WebElement> children = container.findElements(By.xpath("./*"));
-        for (WebElement child : children) {
-            String tag = child.getTagName().toLowerCase();
-            if ("h2".equals(tag) || child.getAttribute("class") != null && child.getAttribute("class").contains("left")) {
-                String t = child.getText().trim();
-                if (!t.isEmpty()) headings.add(t);
-            }
-        }
-        return headings;
+        return headings.stream()
+                .map(e -> e.getText().trim())
+                .filter(t -> !t.isEmpty())
+                .toList();
     }
 
     public List<String> getSubItemsByHeadingIndex(int headingIndex) {
@@ -65,21 +65,22 @@ public class LeftNavComponent {
     }
 
     public void clickSubItem(String subItemText) {
-        WebElement link = container.findElement(By.xpath(".//a[normalize-space(text())='" + subItemText + "']"));
-        link.click();
+        subLinks.stream()
+                .filter(link -> link.getText().trim().equalsIgnoreCase(subItemText))
+                .findFirst()
+                .ifPresent(WebElement::click);
     }
-    public int getSubItemIndexByName(String subItemText) {
-        List<String> allHeadings = getHeadings();
 
-        for (int headingIndex = 0; headingIndex < allHeadings.size(); headingIndex++) {
-            List<String> subItems = getSubItemsByHeadingIndex(headingIndex);
-            for (int i = 0; i < subItems.size(); i++) {
-                if (subItems.get(i).equalsIgnoreCase(subItemText.trim())) {
-                    return i;
-                }
-            }
-        }
-
-        return -1;
-    }
+//    public int getSubItemIndexByName(String subItemText) {
+//        List<String> allHeadings = getHeadings();
+//        for (int headingIndex = 0; headingIndex < allHeadings.size(); headingIndex++) {
+//            List<String> subItems = getSubItemsByHeadingIndex(headingIndex);
+//            for (int i = 0; i < subItems.size(); i++) {
+//                if (subItems.get(i).equalsIgnoreCase(subItemText.trim())) {
+//                    return i;
+//                }
+//            }
+//        }
+//        return -1;
+//    }
 }

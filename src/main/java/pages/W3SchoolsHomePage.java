@@ -39,7 +39,7 @@ public class W3SchoolsHomePage extends BasePage{
             Waits.visibilityOf(driver, timeOutSeconds, title);
             return title.isDisplayed() && title.getText().contains("Learn to Code");
         } catch (Exception e) {
-            System.out.println("Page not loaded or title element not found: " + e.getMessage());
+            log.info("Page not loaded or title element not found: " + e.getMessage());
             return false;
         }
     }
@@ -62,14 +62,12 @@ public class W3SchoolsHomePage extends BasePage{
     public List<String> getResultTexts() {
         try {
             Waits.visibilityOf(driver, timeOutSeconds, resultContainer);
-            // אני לא יודעת איך מהJSON אני אשלוף רשימה? לכן:
-            List<WebElement> items = resultContainer.findElements(By.cssSelector("a.search_item"));
-            return items.stream()
+            return resultItems.stream()
                     .map(WebElement::getText)
                     .filter(text -> !text.trim().isEmpty())
                     .collect(Collectors.toList());
         } catch (Exception e) {
-            log.info("Failed to retrieve result items: " + e.getMessage());
+            log.error("Failed to retrieve result items: " + e.getMessage());
             return List.of();
         }
     }
@@ -78,10 +76,9 @@ public class W3SchoolsHomePage extends BasePage{
     public boolean allResultsContain(String keyword) {
         List<String> results = getResultTexts();
         if (results.isEmpty()) {
-            log.info("No search results found.");
+            log.error("No search results found.");
             return false;
         }
-
         boolean allMatch = results.stream()
                 .allMatch(text -> text.toLowerCase().contains(keyword.toLowerCase()));
 
@@ -96,8 +93,7 @@ public class W3SchoolsHomePage extends BasePage{
     public void selectSuggestion(String text) {
         try {
             Waits.visibilityOf(driver, timeOutSeconds, resultContainer);
-            List<WebElement> items = resultContainer.findElements(By.cssSelector("a.search_item"));
-            for (WebElement item : items) {
+            for (WebElement item : resultItems) {
                 if (item.getText().toLowerCase().contains(text.toLowerCase())) {
                    log.info("Clicking on result: " + item.getText());
                     item.click();
@@ -105,10 +101,10 @@ public class W3SchoolsHomePage extends BasePage{
                 }
             }
 
-            log.info("No result found containing: " + text);
+            log.error("No result found containing: " + text);
 
         } catch (Exception e) {
-           log.info("Failed to select suggestion: " + e.getMessage());
+           log.error("Failed to select suggestion: " + e.getMessage());
         }
     }
 

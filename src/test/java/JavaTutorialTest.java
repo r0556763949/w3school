@@ -44,8 +44,9 @@ public class JavaTutorialTest extends BaseTest {
 //        List<String> actualMainTopics = leftnNav.getHeadings();
 //        int index = actualMainTopics.indexOf(mainTopic);
 //        softAssert.assertTrue(index >= 0, "Main topic '" + mainTopic + "' not found in the left nav");
-//        List<String> actualSubTopics = leftnNav.getSubItemsByHeadingIndex(index);
+//
 //        if (index < 2) {
+//        List<String> actualSubTopics = leftnNav.getSubItemsByHeadingIndex(index);
 //            softAssert.assertEquals(
 //                    actualSubTopics,
 //                    expectedSubTopics,
@@ -53,13 +54,16 @@ public class JavaTutorialTest extends BaseTest {
 //            );
 //        }
 //
-//        javaPage.verifyNextTopicNavigation();
+//softAssert.assertTrue(
+//        javaPage.verifyNextTopicNavigation() ,
+//        "Did not navigate to next topic"
+//        );
 //        javaPage.clickPreviousAndVerify();
 //        javaPage.getTopNav().clickLinkByText("html");
 //        softAssert.assertTrue(
 //                driver.getCurrentUrl().contains("html") ,
 //                "Did not navigate to html tutorial page"
-//        );
+//                        );
 //        softAssert.assertAll();
 //    }
     @Test
