@@ -1,14 +1,19 @@
 import co.verisoft.fw.asserts.SoftAssertsScreenShot;
 import co.verisoft.fw.selenium.drivers.VerisoftDriver;
 import co.verisoft.fw.selenium.drivers.factory.DriverCapabilities;
+import config.DynamicExecutor;
+import config.TryAI;
 import jdk.jfr.Description;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
+import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeOptions;
 import pages.W3SchoolsHomePage;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
 import java.util.List;
 
 @Execution(ExecutionMode.CONCURRENT)
@@ -16,6 +21,19 @@ public class HomePageTest extends BaseTest {
     @DriverCapabilities
     private final ChromeOptions capabilities = new ChromeOptions();
 
+//    @Test
+//    public void aiSeleniumTest(VerisoftDriver driver) throws Exception {
+//        driver.get("https://www.w3schools.com/");
+//
+//        String aiResponse = TryAI.generateSeleniumCode(driver, "תקליד JAVA  בתיבת החיפוש שבHEADER ");
+//
+//        // מוציאים רק את הקוד שה-AI החזיר
+//        String code = TryAI.extractCodeFromResponse(aiResponse);
+//        System.out.println("AI generated code:\n" + code +"!!!!!!!");
+//
+//        DynamicExecutor.execute(driver, code);
+//        Thread.sleep(3000);
+//    }
     @Test
     @DisplayName("open Wsachools Home")
     @Description("open home, topnav , search java , choose java-tutoril")
